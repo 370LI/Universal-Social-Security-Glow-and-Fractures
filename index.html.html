@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全民社保：光环与裂痕</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入星空背景特效依赖（极简，无额外加载） -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- 星空背景容器 -->
+    <div id="particles-js"></div>
+
+    <!-- 首页引导页（极简悬念版） -->
+    <section class="hero-section" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">全民社保</h1>
+            <h2 class="hero-subtitle">光环与裂痕</h2>
+            <div class="hero-trigger" id="heroTrigger">
+                <span class="trigger-text">点击解锁故事</span>
+                <i class="fas fa-chevron-down trigger-icon"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- 章节解锁进度（游戏闯关式） -->
+    <div class="progress-bar-container" id="progressBarContainer">
+        <div class="progress-bar-inner" id="progressBarInner"></div>
+        <div class="progress-text" id="progressText">0/6 章节已解锁</div>
+    </div>
+
+    <!-- 侧边导航（游戏关卡式，默认隐藏） -->
+    <nav class="sidebar" id="sidebar">
+        <ul class="nav-list">
+            <li class="nav-item locked" data-level="1">
+                <span class="level-badge">01</span>
+                <a href="#chapter1" class="nav-link">数据辉煌下的个体重量</a>
+                <i class="fas fa-lock lock-icon"></i>
+            </li>
+            <li class="nav-item locked" data-level="2">
+                <span class="level-badge">02</span>
+                <a href="#chapter2" class="nav-link">“自愿”背后的博弈与风险</a>
+                <i class="fas fa-lock lock-icon"></i>
+            </li>
+            <li class="nav-item locked" data-level="3">
+                <span class="level-badge">03</span>
+                <a href="#chapter3" class="nav-link">维权之路：理想与现实的落差</a>
+                <i class="fas fa-lock lock-icon"></i>
+            </li>
+            <li class="nav-item locked" data-level="4">
+                <span class="level-badge">04</span>
+                <a href="#chapter4" class="nav-link">代际分界线：一个家庭的选择</a>
+                <i class="fas fa-lock lock-icon"></i>
+            </li>
+            <li class="nav-item locked" data-level="5">
+                <span class="level-badge">05</span>
+                <a href="#chapter5" class="nav-link">企业：合规与生存的钢丝</a>
+                <i class="fas fa-lock lock-icon"></i>
+            </li>
+            <li class="nav-item locked" data-level="6">
+                <span class="level-badge">06</span>
+                <a href="#conclusion" class="nav-link">结语：走向更公平的未来</a>
+                <i class="fas fa-lock lock-icon"></i>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- 主内容区（闯关式展开） -->
+    <main class="main-content" id="mainContent">
+       <!-- 引言（解锁第一章前的引导） -->
+<section class="intro" id="intro">
+    <div class="container">
+        <h2 class="section-title">引言：一场“乌龙”背后的真问题</h2>
+        <div class="intro-content">
+            <p>2025年8月5日，话题标签#社保#在微博以燎原之势冲上热搜榜第一位——最高人民法院一纸裁定，明确“自愿放弃社保协议”无效。社保，这项由国家立法建立、旨在为全民提供基础保障的制度，再次被推至舆论中心。</p>
+            
+            <!-- 第一张图片：对应热搜话题，添加动态入场动画 -->
+            <div class="image-group single-image">
+                <img src="images/Sentiment analysis of Xiaohongshu notes.png" alt="社保热搜话题页面" class="intro-img animate-fade-in">
+            </div>
+
+            <p>在社交媒体上，公众的态度呈现鲜明分野。以小红书为例，在爬取的258条相关笔记中，53.88% 带有显著消极情绪：“月薪3千扣完社保只剩两千多，房租水电都不够”“刚毕业只想多拿现金，养老医保太遥远”……打工人的现实焦虑清晰可闻。与之相伴的，是小微企业主的生存忧叹：“小餐馆雇两个人，社保一年多掏几万，实在扛不住。”</p>
+            <p>与此同时，43.02% 的积极声音则聚焦于制度的保障本质。有人分享“手术靠医保报销大半费用”的亲历，坦言“短期少拿几百，但生病失业时有兜底”；亦有人视之为“规范企业用工，避免劣币驱逐良币”的进步基石。剩余3.10% 的笔记持中性立场，进行客观探讨。</p>
+            <p>这场自发的全民讨论，围绕“工资缩水”“企业成本”“补缴压力”“协议效力”等核心议题激烈展开，交织着个体的利益权衡与深层的生存困境。</p>
+            
+            <!-- 第二张图片：对应词云，添加动态入场动画 -->
+            <div class="image-group single-image">
+                <img src="images/Word cloud..jpg" alt="社保相关讨论数据词云" class="intro-img animate-fade-in">
+            </div>
+
+            <p>不同的声音混杂，恐慌情绪在屏幕间流动着，仿佛一块巨石将投入本就波澜起伏的就业市场。然而，随着《人民日报》等权威媒体与多位法律学者接连辟谣：这并非一场颠覆性的新政，而是最高人民法院对一纸早已在法律上无效的“自愿放弃社保”协议，进行了最明确、最统一的司法终裁。一场因信息误读引发的“风波”至此才落下定音槌。</p>
+            <p>然而，这场看似乌龙的插曲，却如一道强光，意外照亮了中国社会保障体系中长期存在却鲜被正视的结构性断层。数据之下，我们看到的不再是简单的对错，而是一个关乎亿万劳动者保障、数百万企业生存韧性，以及一个迈向超级老龄化社会未来的复杂生态系统。</p>
+
+            <div class="unlock-btn" id="unlockChapter1">
+                <span>解锁第一章</span>
+                <i class="fas fa-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- 章节1（默认隐藏，解锁后显示） -->
+        <section class="chapter locked" id="chapter1" data-level="1">
+            <div class="container">
+                <h2 class="chapter-title">
+                    <span class="chapter-badge">01</span>
+                    数据辉煌下的个体重量
+                </h2>
+                <div class="chapter-content">
+                    <p>宏观数据的增长，往往难以完全反映个体在制度运行中的真实负荷。</p>
+                    <p>若以网络热议的“月薪3000元”为例简单测算：一位月薪3000元的职工，社保个人缴纳部分约占10.5%，即每月扣除约315元。这正是许多人感叹“到手收入缩水”的直观来源。而对企业而言，为这样一名员工缴纳社保，单位部分每月需支出约900元，年累计超万元。对于利润微薄的小微主体，多名员工的社保支出叠加，确可能成为经营重负。</p>
+                    
+                    <!-- 替换为嵌入式交互式HTML图表 -->
+<div class="image-container">
+    <!-- iframe嵌入本地HTML文件 -->
+    <iframe 
+        src="charts/社会保险参保人数流图.html" 
+        frameborder="0" 
+        class="chapter-iframe"
+        title="社会保险参保人数流图">
+    </iframe>
+</div>
+                    
+                    <p>纵观2010年至2024年，我国五项社会保险参保人数持续攀升，安全网不断扩大。截至2024年，全国城镇职工养老保险参保人数已达约3.87亿人。然而，对照4.73亿的城镇就业总人口，仍有近一亿人尚未被此网络覆盖。他们多是穿梭于城市街巷的快递员、服务员、临时工——既是经济运转不可或缺的齿轮，也是社保体系未能完全捕捉的“隐形人”。</p>
+                    
+                    <div class="chart-container">
+    <!-- 标题匹配新图表内容 -->
+    <h3 class="chart-title">各省级行政区就业社保参保率可视化</h3>
+    <!-- 替换为目标HTML文件路径 -->
+    <iframe src="charts/各省级行政区就业社保参保率可视化/各省级行政区就业社保参保率可视化.html" frameborder="0" class="interactive-chart"></iframe>
+</div>
+                    
+                    <p>除此之外，从参保率普遍较高的东部地区，到参保率普遍较低的中西部省份，区域间发展的不均衡，也传导为社会保障安全网韧性的差异。不同区域的劳动者，即使从事相似的工作，所能获得的实际保障水平也可能相去甚远。</p>
+                    <p>宏观数据的增长，无法消解个体对工资收入的迫切需求，也难以化解不同地域小微企业在成本压力下的生存焦虑。在社保规模不断扩张的背景下，如何让数字转化为真实获得感，渐渐成为了社保制度面临的深层挑战。</p>
+                    
+                    <div class="unlock-btn" id="unlockChapter2">
+                        <span>解锁第二章</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      <!-- 章节2（默认隐藏） -->
+<section class="chapter locked" id="chapter2" data-level="2">
+    <div class="container">
+        <h2 class="chapter-title">
+            <span class="chapter-badge">02</span>
+            “自愿”背后的博弈与风险
+        </h2>
+        <div class="chapter-content">
+            <p>“自愿放弃社保”从来不是一个简单的选择题，其背后交织着劳动者的短期理性、企业的成本压力，乃至可能衍生的道德风险与法律纠纷。</p>
+            <p>一方面，不少劳动者，尤其是流动性强、收入不稳定的群体，更倾向于将社保折现为眼前可支配的收入。刘女士就曾为了每月多拿几百元，签字放弃社保。离职后，刘女士又成功通过劳动仲裁，状告前公司未依法足额缴纳社保。最终，公司败诉，同意为她补缴长达十年的社保。</p>
+            <p>然而，当她拿到补缴通知单时，愣住了。补缴总额是13万元，根据规定，她需要一次性支付个人部分3万元。"我根本拿不出这笔钱！"刘女士后悔不迭，她的胜利成了一场无法兑现的空响。当初入职时，是她为了多拿几百元工资，主动签字放弃社保的。如今，判决已下，无法撤销。</p>
+            <p>这种“自愿”在后期维权中，反而成为劳动者自身的沉重包袱。另一方面，对企业而言，“自愿”协议并不能真正隔绝风险。</p>
+            <p>2023年3月，一位55岁的洗碗大叔前来应聘。大叔坦言自己不识字，不会签合同，只要求按月领取5000元现金工资，并明确表示"不需要交社保"。"我知道不交社保不合规，但现实中，很多这个年纪的员工，他们更看重到手的现金。"李建国坐在餐馆的角落里，道出了小微企业主的普遍困境。在餐饮行业用工成本与流动性的双重压力下，他默许了这种基于口头约定的"默契"。</p>
+            <p>近一年时间，双方相安无事。</p>
+            <p>然而，2023年12月，一纸劳动仲裁申请书送到了李建国手中，申请人正是那位洗碗大叔。诉求包括：未签订劳动合同的双倍工资、加班费以及补缴社会保险。李建国找到大叔对质，对方显得局促不安，最终承认："是我女婿让我做的，我自己不想的。"随后，在与大叔女婿的电话沟通中，对方展现出对《劳动合同法》相关条款的熟悉，并态度强硬地要求仲裁。</p>
+            <p>最终，在仲裁庭的调解下，李建国支付了三万元作为一次性赔偿。事后他了解到，这笔钱被翁婿二人平分。更让他感到无力的是，他怀疑自己遭遇了专门针对小微企业的"职业仲裁"。"他女婿可能就是个惯犯，利用这种法律漏洞来牟利。"这场仲裁没有赢家，李建国损失了金钱和对人性的信任，而那位大叔，也失去了工作和一份稳定的收入。</p>
+            <p>“自愿”从来不是豁免责任的护身符，它更像是社保意识缺失与制度执行滞后之间的一道裂缝，让劳动者与企业都在其中摇摆不定。</p>
+        </div>
+        
+        <!-- 保留解锁按钮，不破坏阅读流 -->
+        <div class="unlock-btn" id="unlockChapter3">
+            <span>解锁第三章</span>
+            <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+</section>
+
+      <!-- 章节3（默认隐藏） -->
+<section class="chapter locked" id="chapter3" data-level="3">
+    <div class="container">
+        <h2 class="chapter-title">
+            <span class="chapter-badge">03</span>
+            维权之路：制度理想与执行现实的落差
+        </h2>
+        <div class="chapter-content">
+            <p>中国社保基金在宏观层面展现出强大的韧性与稳定性。2010年至2024年间，社保基金总收入（剔除通胀影响）从约1.94万亿元增长至9.07万亿元，绝大多数年份保持盈余，为应对人口老龄化积累了重要储备。特别值得一提的是，在2020年疫情期间，尽管收入增长率跌至到谷底-11.8%，但2021年收入增长率迅速回升至27.2%，显示了中国社保体系的强大韧性和自我修复能力。</p>
+            <p>然而，基金的整体稳健，并不能自动转化为个体维权时的顺畅体验。</p>
+
+            <!-- 图表容器调整：纵向排列，简化结构，保留核心标识 -->
+            <div class="chart-container">
+                <h3 class="chart-title">2010-2024年社保基金收支趋势分析</h3>
+                <!-- 第一个图表：收入支出趋势（单独一行） -->
+                <div class="single-chart-item">
+                    <h4 class="sub-chart-title">收入支出趋势</h4>
+                    <iframe src="charts/社保基金收入支出趋势分析.html" frameborder="0" class="interactive-chart"></iframe>
+                </div>
+                <!-- 第二个图表：收支差额分析（单独一行，纵向排列） -->
+                <div class="single-chart-item">
+                    <h4 class="sub-chart-title">收支差额分析</h4>
+                    <iframe src="charts/社保基金收支差额分析.html" frameborder="0" class="interactive-chart"></iframe>
+                </div>
+            </div>
+
+                <p>在哥哥的提醒下，离职近两年的张薇开始了追讨前公司未足额缴纳社保的征程。她首先向原公司发送邮件，要求补足社保差额，却石沉大海。随后，她在政务平台进行了实名投诉。</p>
+                <p>起初，事情似乎出现了转机。公司人事主动联系她，但给出的解决方案是："养老保险无法补缴，我们只能为你补缴住房公积金。"张薇一度几乎接受这个方案，但咨询了一位熟悉社保政策的朋友后，她改变了主意。"朋友告诉我，养老保险补缴的钱是直接进入个人账户的，直接影响未来养老金的计算。他们说不能补，很可能只是为了省事。"</p>
+                <p>从此，她踏入了维权的"旋转门"。她先后致电人社局、12345市民热线和12333劳动保障热线，得到的答复各异，甚至互相矛盾。有的部门表示"需向省局咨询"，有的则直接告知"此事不属我们管辖"。最终，所有渠道的建议都指向了同一个终点：申请劳动仲裁。</p>
+                <p>她备齐了所有材料——劳动合同、银行流水、社保缴费明细。仲裁庭审的过程却快得让她茫然。"庭审员的态度有明显的倾向性，我精心准备的证据材料，对方仅以'真实性认可，关联性不认可'就轻易带过。整个过程感觉像在完成一个预设的程序。"十几分钟后，庭审结束。</p>
+                <p>等待多日后，她拿到了一纸"驳回请求"的裁决书，理由是"超过仲裁时效"。不甘心的她，又亲自走访了社保中心的多个科室。一位风控科的工作人员向她解释了一个更具"地方特色"的现实："如果公司完全没给你交，我们可以立案催缴。但对于'未足额缴纳'，我们目前确实没有强制补缴的政策。疫情之后，我们在执法上也需要考虑企业的实际困难。"</p>
+                <p>另一名工作人员甚至带着劝诫的口吻对她说："你还这么年轻，为这点事耗费这么多精力不值得，不如把时间用在提升自己上。"</p>
+                <p>"我争的其实不是那未来每月可能多出来的几块钱养老金，"张薇说，她的声音平静中带着坚定，"我争的是一个理，是一个明明写在法律条文上的权利，为什么在实践中会变得如此遥不可及？"她的维权长征，最终停在了"政策执行差异性"这堵无形的墙壁前。</p>
+            </div>
+
+            <p>张薇的困境凸显出一种结构性矛盾：制度设计上，社保是法定权利；但在执行层面，它却可能受限于地方政策、行政资源、甚至“营商环境”的柔性考量。维权者往往需要穿越一道由程序、时效、解释权与行政裁量共同构成的“旋转门”，而结局常常是无功而返。</p>
+
+            <!-- 保留解锁按钮，不改动核心交互 -->
+            <div class="unlock-btn" id="unlockChapter4">
+                <span>解锁第四章</span>
+                <i class="fas fa-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+       <!-- 章节4（默认隐藏） -->
+<section class="chapter locked" id="chapter4" data-level="4">
+    <div class="container">
+        <h2 class="chapter-title">
+            <span class="chapter-badge">04</span>
+            代际分界线：一个家庭的选择
+        </h2>
+        <div class="chapter-content">
+            <p>在中国社保体系不断扩张的版图上，微观家庭内部也出现了深刻的分化。这种分化有时并非源于地域或政策的显性差异，而是根植于代际之间截然不同的观念与选择，最终在同一个屋檐下划出一道清晰的保障“分界线”。林媛的家庭，便是这道分界线的真实缩影。</p>
+            
+            <p>林媛的父亲今年52岁，一身慢性病缠身，早已无法像从前那样劳作。前些日子整理父亲的零碎材料时，林媛意外翻出了一份尘封多年的记录，才知道父亲年轻时曾有过一次改变晚年生活的机会——当年有家离家两小时车程的乡镇工厂愿意招他，厂里还会为他缴纳职工社保。可父亲嫌路途远，不顾家里人再三劝说，干了不到一年便执意辞了职。说起这件事，林媛的语气里满是复杂的惋惜，她知道，父亲这个只求“眼前舒适”的决定，在数十年后结出了苦涩的果实：他的后半生，彻底失去了职工社保这张最稳固的养老安全网。如今林媛每月都要固定拿出1000到1500元，贴补父亲的生活费，即便她后来帮父亲补缴了居民养老保险，这笔养老金也要等父亲60岁才能领取，而且金额远比不上职工养老保险。“还要等8年，”林媛常念叨，“这8年太长了，压在肩上的负担，具体又沉重。”</p>
+            
+            <p>父亲的经历，让林媛格外在意母亲的养老保障。母亲今年56岁，看着老伴如今的境况，再加上女儿一次次耐心的沟通与劝说，心里也渐渐有了自己的打算。她没有像父亲那样只顾眼前，而是拿出自己攒下的积蓄，主动补缴了最高档次的城乡居民养老保险。“老了总得有自己的底气，不能事事都手心向上跟儿女要钱，这样活着才有尊严。”母亲常把这句话挂在嘴边，林媛听着，心里既欣慰，又忍不住感慨，一家人对“保障”的理解，竟隔着如此明显的代际鸿沟。</p>
+            
+            <p>一家两代人，面对“保障”这一人生课题，终究给出了两份截然不同的答案。父亲的选择，是过往一个时代里许多劳动者的缩影：在他们眼里，社会保障是遥远又模糊的概念，攥在手里的现金、触手可及的便利，才是实实在在的生活。可这份“实在”，最终却将养老的压力，变成了子女肩上甩不开的“无限代际责任”。而母亲，还有推动她做出选择的林媛，则代表了正在转变的新观念：她们早早看清，社会保障从来不是一种负担，而是对抗未来风险的底气，是维持晚年尊严的依靠，更是能让下一代卸下家庭重负的必需品。</p>
+            
+            <p>这个藏在普通家庭里的故事，揭示了一个超越政策本身的核心命题：社会保障网络的最终效力，不仅取决于制度设计的完善与否，更取决于每一个个体和家庭是否具备穿越时间、规划未来的“保障意识”。当这种意识在代际之间完成传递与觉醒，社会保障才能真正从纸面上的权利，转化为千家万户生活中可感、可依的坚实力量。</p>
+            
+            <div class="unlock-btn" id="unlockChapter5">
+                <span>解锁第五章</span>
+                <i class="fas fa-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+       <!-- 章节5（默认隐藏） -->
+<section class="chapter locked" id="chapter5" data-level="5">
+    <div class="container">
+        <h2 class="chapter-title">
+            <span class="chapter-badge">05</span>
+            企业：在合规与生存之间走钢丝
+        </h2>
+        <div class="chapter-content">
+            <p>不同规模企业的社保缴纳情况差异显著：大型企业缴费规范、水平集中；而小微企业缴费不全、按最低基数缴纳的现象更普遍——对许多小企业主而言，社保不是“要不要缴”的道德问题，而是“缴不缴得起”的生存问题。</p>
+            
+            <div class="image-container">
+    <!-- 第一张图：violin plot.jpg -->
+    <img src="images/Per capita social security contribution by enterprise size (violin plot)..jpg" alt="不同企业规模社保缴费分布（小提琴图）" class="chapter-img">
+    <!-- 第二张图：Bubble chart.jpg（直接放在第一张后面，垂直排列） -->
+    <img src="images/Bubble chart of corporate social security burden analysis..jpg" alt="不同企业规模社保缴费分布（气泡图）" class="chapter-img">
+    <!-- 保留统一的说明文字 -->
+    <p class="image-caption">不同企业规模的人均社保缴费额分布（95%分位数以内）</p>
+</div>
+            
+            <p>不同企业规模的人均社保缴费额分布小提琴图中，大型企业的图形底部紧束，意味着极少有企业滑向极低的缴费水平；而微型、小型企业的图形底部则显著开阔，映射出社保缴纳不全、长期按最低基数缴纳等现象更普遍。企业社保负担分析气泡图也侧面印证了这一点。虽然绝大多数的企业社会保险缴费负担都较小，99.5%的企业社会保险缴费额度占营业收入的比例小于8%，但也有少数企业的社会保险缴费负担较大，且这些企业更集中分布在员工数量较少，企业总资产额较低的区域，印证了规模较小的企业，其社保缴纳不全、长期按最低基数缴纳等现象更普遍的结论。</p>
+            
+            <p>不仅如此，大型与中型企业的小提琴图图形，多呈中间厚实、两端收敛的"橄榄形"，显示出缴费水平集中、规范程度较高的稳定状态，且图形的顶部更高，意味着其人均社保缴费额的上限也较高，更可能构建多层次的保障体系。反观小型与微型企业，其图形分布更为平缓和离散——这意味着在这个庞大而差异显著的群体内部，社保缴纳情况千差万别，高度不确定。</p>
+            
+            <p>对许多小企业主而言，社保不是“要不要缴”的道德问题，而是“缴不缴得起”的生存问题。王哲经营着一家20人的小公司，他的抽屉里锁着十几份《社保缴纳调整协议》。协议中，员工“自愿申请”不缴社保，公司则每月补贴1300元现金，并以加粗字体提示可能丧失的各项保障。王哲知道这并不合法，一位律师曾警告他：“只要有一个员工举报，所有协议作废，税务将全面追缴。”但他无奈：“不是我想逃社保，是现实所迫。员工等着用钱，我只能用这种方式留住人。”</p>
+            
+            <p>王哲经营着一家20人的小公司，抽屉里锁着十几份《社保缴纳调整协议》——员工“自愿申请”不缴社保，公司每月补贴1300元现金。他知道这并不合法：“只要有一个员工举报，所有协议作废，税务将全面追缴。”但他无奈：“员工等着用钱，我只能用这种方式留住人。”</p>
+           
+            <p>这种在合规边缘试探的“柔性应对”，折射出小微企业在法律刚性要求与经营现实之间的两难。它们既是就业的容纳器，也是社保制度落地中最脆弱的环节。</p>
+            
+            <p>小微企业既是就业的容纳器，也是社保制度落地中最脆弱的环节。它们在法律刚性要求与经营现实之间的两难，需要更具弹性的政策支持。</p>
+            
+            <div class="unlock-btn" id="unlockConclusion">
+                <span>解锁结语</span>
+                <i class="fas fa-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- 结语（默认隐藏） -->
+        <section class="chapter locked" id="conclusion" data-level="6">
+            <div class="container">
+                <h2 class="chapter-title">
+                    <span class="chapter-badge">06</span>
+                    结语：走向更公平、更落地的保障未来
+                </h2>
+                <div class="chapter-content">
+                    <p>社保的本质，是风险的共担、权利的平等和社会的温度。当制度不断向前推进时，我们既需要关注基金的可持续与覆盖的广泛性，也需要正视那些藏在数据背后的个体故事：在现金与保障间挣扎的劳动者、在维权路上屡屡碰壁的离职员工、在合规成本中艰难平衡的小企业主。</p>
+                    <p>社会保障的完善，注定是一条需要不断缝合“光环”与“裂痕”的长路。只有这张安全网越织越密，才能真正成为每个人在风雨中可以依靠、在年老时能够期待、在困境中能够触摸的，实实在在的守护。</p>
+                    </div>
+                    
+                    <div class="complete-badge">
+                        <i class="fas fa-star"></i>
+                        <span>故事已全部解锁</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 图片放大模态框 -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImg">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <!-- 星空背景初始化 -->
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 1, direction: "none", random: true, straight: false, out_mode: "out", bounce: false }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 0.5 } },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+</body>
+</html>

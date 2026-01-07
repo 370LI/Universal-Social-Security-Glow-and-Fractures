@@ -1,0 +1,749 @@
+/* 全局重置+星空基调 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* 极简无衬线字体，提升干净感 */
+    font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* 星空背景容器 */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #0a1029 0%, #141e46 50%, #1e2954 100%);
+    z-index: -1;
+}
+
+body {
+    line-height: 2; /* 增大行距，强化故事感 */
+    color: #e0e0e0;
+    background: transparent;
+    overflow-x: hidden;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 1. 首页：极简悬念设计（无冗余元素） */
+.hero-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 100;
+    transition: all 1s ease;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 300; /* 轻量字体，更干净 */
+    color: #ffffff;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.5s forwards;
+}
+
+.hero-subtitle {
+    font-size: 1.8rem;
+    font-weight: 200;
+    color: #a0b8ff;
+    margin-bottom: 4rem;
+    letter-spacing: 0.2em;
+    opacity: 0;
+    animation: fadeInUp 1s ease 1s forwards;
+}
+
+/* 首页触发按钮（游戏式交互） */
+.hero-trigger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInUp 1s ease 1.5s forwards;
+    transition: all 0.5s ease;
+}
+
+.hero-trigger:hover {
+    transform: translateY(-5px);
+}
+
+.trigger-text {
+    font-size: 1rem;
+    color: #809fff;
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+}
+
+.trigger-icon {
+    font-size: 1.5rem;
+    color: #ffffff;
+    animation: bounce 2s infinite;
+}
+
+/* 2. 进度条（游戏闯关式） */
+.progress-bar-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 800px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    z-index: 90;
+    display: none;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, #4d79ff, #809fff);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    font-size: 0.8rem;
+    color: #a0b8ff;
+}
+
+/* 3. 侧边导航（游戏关卡式） */
+.sidebar {
+    position: fixed;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    z-index: 80;
+    display: none;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+.nav-item {
+    margin: 15px 0;
+    position: relative;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.nav-item.unlocked {
+    opacity: 1;
+}
+
+.level-badge {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #a0b8ff;
+    text-align: center;
+    line-height: 30px;
+    font-size: 0.8rem;
+    margin-right: 10px;
+}
+
+.nav-item.unlocked .level-badge {
+    background: #4d79ff;
+    color: #ffffff;
+}
+
+.nav-link {
+    color: #a0b8ff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+}
+
+.nav-item.unlocked .nav-link:hover {
+    color: #ffffff;
+}
+
+.lock-icon {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0b8ff;
+    font-size: 0.8rem;
+}
+
+.nav-item.unlocked .lock-icon {
+    display: none;
+}
+
+/* 4. 主内容区（闯关式展开） */
+.main-content {
+    padding: 100px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+    display: none;
+}
+
+.main-content.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 引言部分 */
+.intro {
+    margin-bottom: 100px;
+    padding: 40px;
+    background: rgba(10, 16, 41, 0.7);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 30px;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(128, 159, 255, 0.3);
+    padding-bottom: 15px;
+}
+
+.intro-content {
+    font-size: 1.1rem;
+    color: #d0d8ff;
+    letter-spacing: 0.02em;
+}
+
+/* 章节通用样式 */
+.chapter {
+    margin-bottom: 100px;
+    padding: 40px;
+    background: rgba(10, 16, 41, 0.7);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    display: none; /* 默认隐藏 */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+}
+
+.chapter.unlocked {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.chapter-title {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 30px;
+    letter-spacing: 0.05em;
+}
+
+.chapter-badge {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #4d79ff;
+    color: #ffffff;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1rem;
+    margin-right: 15px;
+}
+
+.chapter-content {
+    font-size: 1.1rem;
+    color: #d0d8ff;
+    letter-spacing: 0.02em;
+}
+
+/* 图片容器 */
+.image-container {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.chapter-img, .intro-img, .conclusion-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+}
+
+.chapter-img:hover {
+    transform: scale(1.02);
+}
+
+.image-caption {
+    margin-top: 15px;
+    color: #a0b8ff;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+/* 案例卡片 */
+.case-card {
+    background: rgba(16, 24, 54, 0.8);
+    border-left: 3px solid #4d79ff;
+    padding: 25px;
+    margin: 30px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.case-title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+/* 家庭故事 */
+.family-story {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.family-member {
+    flex: 1 1 45%;
+    background: rgba(16, 24, 54, 0.8);
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.family-divider {
+    width: 2px;
+    background: rgba(128, 159, 255, 0.3);
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .family-divider {
+        display: block;
+    }
+}
+
+.member-title {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(128, 159, 255, 0.3);
+}
+
+/* 图表容器 */
+.chart-container {
+    margin: 40px 0;
+    background: rgba(16, 24, 54, 0.8);
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.chart-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.interactive-chart {
+    width: 100%;
+    height: 500px;
+    border-radius: 4px;
+}
+
+/* 解锁按钮（游戏闯关核心） */
+.unlock-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #4d79ff, #809fff);
+    color: #ffffff;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(77, 121, 255, 0.4);
+}
+
+.unlock-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(77, 121, 255, 0.6);
+}
+
+.unlock-btn span {
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    margin-right: 10px;
+}
+
+/* 完成徽章 */
+.complete-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 20px;
+    background: rgba(77, 121, 255, 0.2);
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+}
+
+.complete-badge i {
+    margin-right: 15px;
+    font-size: 1.5rem;
+    color: #4d79ff;
+    animation: spin 3s linear infinite;
+}
+
+/* 图片放大模态框 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 8px;
+}
+
+.modal-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #d0d8ff;
+    padding: 15px 0;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 100;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #a0b8ff;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 响应式适配 */
+@media (max-width: 992px) {
+    .sidebar {
+        top: auto;
+        bottom: 20px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 90%;
+        background: rgba(10, 16, 41, 0.9);
+        border-radius: 50px;
+        padding: 10px 20px;
+    }
+
+    .nav-list {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+
+    .nav-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-item {
+        margin: 0 10px;
+        white-space: nowrap;
+    }
+
+    .lock-icon {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .intro, .chapter {
+        padding: 25px;
+    }
+
+    .family-member {
+        flex: 1 1 100%;
+    }
+
+    .family-divider {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .chapter-title {
+        font-size: 1.5rem;
+    }
+
+    .interactive-chart {
+        height: 300px;
+    }
+}
+/* 单张图片容器：适配分开显示的图片，保留呼吸感 */
+.image-group.single-image {
+    margin: 30px 0; /* 上下间距适中，增加呼吸感 */
+    padding: 0 10px;
+    max-width: 750px; /* 限制图片最大宽度，避免过大 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 引言图片样式：适中尺寸 + 柔和效果 */
+.intro-img {
+    width: 100%;
+    max-width: 700px; /* 最大宽度，保证呼吸感 */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(77, 121, 255, 0.3); /* 星空蓝阴影，贴合风格 */
+    cursor: zoom-in;
+    display: block;
+    margin: 0 auto; /* 图片居中 */
+    transition: all 0.4s ease; /* 过渡更顺滑 */
+    opacity: 0; /* 初始隐藏，用于动画 */
+    transform: translateY(20px); /* 初始下移，用于动画 */
+}
+
+/* 图片动态入场动画 */
+.animate-fade-in {
+    animation: fadeInUp 0.8s ease 0.3s forwards;
+}
+
+/* 鼠标悬浮交互：轻微上浮+阴影增强，增加动态感 */
+.intro-img:hover {
+    transform: translateY(-5px) scale(1.01); /* 上浮+轻微放大，更灵动 */
+    box-shadow: 0 0 25px rgba(77, 121, 255, 0.5); /* 阴影增强，星空感更浓 */
+}
+
+/* 入场动画关键帧 */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式适配：手机端优化 */
+@media (max-width: 768px) {
+    .image-group.single-image {
+        max-width: 100%;
+        padding: 0 5px;
+    }
+    .intro-img {
+        max-width: 100%;
+    }
+}
+
+/* 保留解锁按钮样式（无需修改） */
+.unlock-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #4d79ff, #809fff);
+    color: #ffffff;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(77, 121, 255, 0.4);
+}
+
+.unlock-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(77, 121, 255, 0.6);
+}
+/* 章节嵌入式HTML图表样式（适配星空风格） */
+.chapter-iframe {
+    width: 100%; /* 占满容器宽度 */
+    height: 600px; /* 图表高度，可根据你的流图调整 */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* 和原有图片阴影一致 */
+    background: rgba(10, 16, 41, 0.8); /* 匹配星空背景的底色，避免白边 */
+}
+
+/* 响应式：手机端缩小iframe高度，适配屏幕 */
+@media (max-width: 768px) {
+    .chapter-iframe {
+        height: 400px;
+    }
+}
+
+/* 保持caption样式不变，仅微调位置 */
+.image-caption {
+    margin-top: 15px;
+    color: #a0b8ff;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-align: center; /* 确保说明文字居中 */
+}
+/* 双图表容器布局 */
+.double-chart .chart-group {
+    display: flex;
+    gap: 20px; /* 两个图表之间的间距 */
+    flex-wrap: wrap; /* 手机端自动换行 */
+    margin-top: 15px;
+}
+
+/* 单个图表子容器 */
+.single-chart-item {
+    flex: 1 1 48%; /* 电脑端每个图表占48%宽度，留间距 */
+    min-width: 300px; /* 最小宽度，避免挤压 */
+}
+
+/* 子图表小标题 */
+.sub-chart-title {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+}
+
+/* 保持原有interactive-chart样式，仅微调高度适配双图表 */
+.interactive-chart {
+    width: 100%;
+    height: 450px; /* 比单图表略矮，适配双列布局 */
+    border-radius: 4px;
+    background: rgba(10, 16, 41, 0.8); /* 匹配星空背景 */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 响应式：手机端每个图表占100%宽度 */
+@media (max-width: 768px) {
+    .single-chart-item {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+    }
+    .interactive-chart {
+        height: 400px; /* 手机端进一步降低高度 */
+    }
+}
+/* 基础阅读样式 - 保留原始字体颜色，仅优化行/段落间距增加呼吸感 */
+.chapter-content {
+    font-size: 16px;
+    line-height: 1.8; /* 保留行距，提升阅读呼吸感 */
+    /* 移除自定义color，恢复原始字体颜色 */
+    margin-bottom: 30px; /* 正文与解锁按钮拉开间距 */
+}
+.chapter-content p {
+    margin-bottom: 15px; /* 保留段落间距，模拟小说排版呼吸感 */
+    /* 不额外设置颜色，继承原始样式 */
+}
+/* 解锁按钮样式（保留交互，不突兀） */
+.unlock-btn {
+    padding: 10px 20px;
+    background: #2f54eb;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
